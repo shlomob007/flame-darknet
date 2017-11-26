@@ -41,7 +41,7 @@ app.get('/posts/one', (req, res) => {
       conn.end()
       return result
     }).then((rows) => {
-      res.send(rows)
+      res.send(rows[0])
     })
 })
 

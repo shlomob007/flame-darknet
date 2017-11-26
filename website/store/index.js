@@ -1,5 +1,7 @@
 import axios from '~/plugins/axios'
 
+export const strict = false
+
 export const state = () => ({
   posts: [
     {
@@ -17,20 +19,17 @@ export const mutations = {
   },
 
   async updatePost (state, data) {
-    // await axios.put(`posts/${data.id}`, data)
-    // const response = await axios.get('posts/one')
+    await axios.put(`posts/${data.id}`, data)
+    const response = await axios.get('posts/one')
+    const post = response.data
+    console.log(post)
 
     const index = state.posts.findIndex((post) => {
       return post.id === data.id
     })
     state.posts.splice(index, 1)
 
-    state.posts.push({
-      id: 0,
-      topic_content: 'topic_content',
-      post_content: 'post_content',
-      post_authar: 'post_content'
-    })
+    state.posts.push(post)
   }
 }
 export const actions = {
